@@ -1,0 +1,971 @@
+/* ==========================================================================
+   Design System - Pastel Theme & Smooth Styling
+   ========================================================================== */
+
+:root {
+  /* Pastel Palette Colors from User-provided Hex Codes */
+  /* #DDDCDB (Light gray), #FD7B41 (Vibrant orange), #EDBF9B (Soft peach), #3C4044 (Dark charcoal) */
+  --bg-gradient-start: #f3f2f0;
+  --bg-gradient-end: #dddddb;
+  
+  --color-primary: #FD7B41;       /* Vibrant Orange */
+  --color-primary-light: #fdebe1; /* Warm light orange tint */
+  --color-primary-dark: #3C4044;  /* Dark Charcoal */
+
+  --color-secondary: #EDBF9B;     /* Soft Peach */
+  --color-secondary-light: #fcf2ea; /* Warm light peach tint */
+  
+  --color-correct-bg: #e6f7ed;    /* Pastel Mint Green */
+  --color-correct-border: #a7f3d0;
+  --color-correct-text: #15803d;
+
+  --color-incorrect-bg: #fef2f2;  /* Pastel Coral Red */
+  --color-incorrect-border: #fca5a5;
+  --color-incorrect-text: #b91c1c;
+
+  --color-info-bg: #EDBF9B;       /* Pastel Peach */
+  --color-info-text: #3C4044;
+  
+  --color-blue-bg: #f6ebe1;       /* Light Warm Peach tint */
+  --color-blue-text: #8b4013;     /* Dark warm brown-orange */
+  --color-blue-border: #fed7aa;   /* Soft Peach border */
+
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --card-border: rgba(255, 255, 255, 0.5);
+  --text-main: #3C4044;           /* Dark Charcoal */
+  --text-muted: #6b6e72;          /* Muted Charcoal */
+  
+  /* Layout tokens */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 10px 15px -3px rgba(148, 163, 184, 0.12), 0 4px 6px -2px rgba(148, 163, 184, 0.04);
+  --shadow-lg: 0 20px 25px -5px rgba(148, 163, 184, 0.18), 0 10px 10px -5px rgba(148, 163, 184, 0.06);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Basic Elements
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Kanit', 'Outfit', sans-serif;
+  color: var(--text-main);
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  padding: 20px 10px;
+}
+
+/* Floating Decorative Shapes */
+.app-background-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  animation: floatShape 12s infinite alternate ease-in-out;
+}
+
+.shape-1 {
+  width: 300px;
+  height: 300px;
+  background-color: var(--color-primary-light);
+  top: 10%;
+  left: -50px;
+}
+
+.shape-2 {
+  width: 350px;
+  height: 350px;
+  background-color: var(--color-secondary-light);
+  bottom: 10%;
+  right: -50px;
+  animation-delay: 2s;
+}
+
+.shape-3 {
+  width: 250px;
+  height: 250px;
+  background-color: var(--color-correct-bg);
+  top: 45%;
+  left: 60%;
+  animation-delay: 4s;
+}
+
+@keyframes floatShape {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(30px, 40px) scale(1.15);
+  }
+}
+
+/* Container */
+.app-container {
+  width: 100%;
+  max-width: 680px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ==========================================================================
+   Header Component
+   ========================================================================== */
+
+.app-header {
+  text-align: center;
+  padding: 10px;
+}
+
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.logo-container:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.logo-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+}
+
+.logo-text {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--color-primary-dark);
+}
+
+.app-header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin-bottom: 6px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.app-header .subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* ==========================================================================
+   Screens & Cards Layout
+   ========================================================================== */
+
+.screen {
+  display: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Base Cards */
+.welcome-card, .question-card, .results-card, .explanation-card, .review-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: var(--transition-smooth);
+}
+
+.welcome-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ==========================================================================
+   Welcome Screen Details
+   ========================================================================== */
+
+.welcome-image {
+  width: 80px;
+  height: 80px;
+  background-color: var(--color-secondary-light);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.welcome-image svg {
+  width: 40px;
+  height: 40px;
+}
+
+.welcome-card h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.welcome-card .description {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.quiz-info-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.info-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 8px 16px;
+  border-radius: 50px;
+  box-shadow: var(--shadow-sm);
+}
+
+.info-chip .chip-icon {
+  font-size: 1.1rem;
+}
+
+.info-chip .chip-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Buttons System
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  width: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(253, 123, 65, 0.25);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(253, 123, 65, 0.4);
+  background: linear-gradient(135deg, #ff905c 0%, #f3ceb2 100%);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-2px);
+}
+
+.btn-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s ease;
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   Quiz Screen Components
+   ========================================================================== */
+
+.quiz-progress-wrapper {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--card-border);
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+#question-counter {
+  color: var(--color-primary-dark);
+}
+
+#score-counter {
+  color: var(--color-correct-text);
+  background: var(--color-correct-bg);
+  padding: 2px 10px;
+  border-radius: 50px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(226, 232, 240, 0.7);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+#progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  border-radius: 50px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question-card h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Option Buttons */
+.option-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(226, 232, 240, 0.8);
+  border-radius: var(--radius-md);
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.option-btn:hover:not(.disabled) {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  background-color: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.option-badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  border-radius: 50%;
+  margin-right: 14px;
+  font-size: 0.85rem;
+  transition: var(--transition-smooth);
+}
+
+.option-btn:hover:not(.disabled) .option-badge {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.option-text {
+  flex-grow: 1;
+  line-height: 1.5;
+  color: var(--text-main);
+  font-weight: 400;
+}
+
+/* Quiz Option States after Check */
+.option-btn.correct {
+  background-color: var(--color-correct-bg) !important;
+  border-color: var(--color-correct-border) !important;
+  color: var(--color-correct-text) !important;
+}
+
+.option-btn.correct .option-badge {
+  background-color: var(--color-correct-border) !important;
+  color: white !important;
+}
+
+.option-btn.correct .option-text {
+  color: var(--color-correct-text) !important;
+  font-weight: 500;
+}
+
+.option-btn.incorrect {
+  background-color: var(--color-incorrect-bg) !important;
+  border-color: var(--color-incorrect-border) !important;
+  color: var(--color-incorrect-text) !important;
+}
+
+.option-btn.incorrect .option-badge {
+  background-color: var(--color-incorrect-border) !important;
+  color: white !important;
+}
+
+.option-btn.incorrect .option-text {
+  color: var(--color-incorrect-text) !important;
+  font-weight: 500;
+}
+
+.option-btn.disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option-btn.fade-out {
+  opacity: 0.45;
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Explanation & Navigation Panels
+   ========================================================================== */
+
+.explanation-card {
+  margin-top: 10px;
+  padding: 20px;
+  background-color: var(--color-blue-bg);
+  border-color: var(--color-blue-border);
+  color: var(--color-blue-text);
+  border-radius: var(--radius-md);
+  animation: slideUp 0.35s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.explanation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+#explanation-status-icon {
+  font-size: 1.2rem;
+}
+
+.explanation-header h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+#explanation-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.quiz-navigation {
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   Results Screen Components
+   ========================================================================== */
+
+.results-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+}
+
+.results-card h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.results-card .description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* SVG Circular Progress */
+.circular-progress-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 10px 0;
+}
+
+.circular-progress {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(226, 232, 240, 0.8);
+  stroke-width: 8px;
+}
+
+.circle-fill {
+  fill: none;
+  stroke: url(#pastel-gradient); /* Will use standard stroke if no def, let's style with solid or css color */
+  stroke: var(--color-primary);
+  stroke-width: 8px;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease-in-out;
+}
+
+.progress-text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#final-score-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.1;
+}
+
+.score-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.results-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 10px;
+}
+
+.results-actions .btn {
+  flex: 1;
+}
+
+/* ==========================================================================
+   Incorrect Questions Review Section
+   ========================================================================== */
+
+.review-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+  animation: slideUp 0.45s ease-out;
+}
+
+.review-section-header {
+  padding: 0 10px;
+}
+
+.review-section-header h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-primary-dark);
+  margin-bottom: 4px;
+}
+
+.review-section-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.review-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-card {
+  padding: 24px;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.review-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.review-question-num {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+.review-question-text {
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.review-options-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed rgba(226, 232, 240, 1);
+}
+
+.review-ans-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.review-badge {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 50px;
+  margin-right: 10px;
+  width: 90px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.review-badge.user-wrong {
+  background: var(--color-incorrect-bg);
+  color: var(--color-incorrect-text);
+}
+
+.review-badge.correct-ans {
+  background: var(--color-correct-bg);
+  color: var(--color-correct-text);
+}
+
+.review-ans-text {
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Footer Component
+   ========================================================================== */
+
+.app-footer {
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+
+.app-footer p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* ==========================================================================
+   Utilities / Helpers
+   ========================================================================== */
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Responsive Styling
+   ========================================================================== */
+
+@media (max-width: 580px) {
+  body {
+    padding: 12px 6px;
+  }
+  
+  .welcome-card, .question-card, .results-card, .review-card {
+    padding: 22px 18px;
+    border-radius: var(--radius-md);
+  }
+  
+  .app-header h1 {
+    font-size: 1.4rem;
+  }
+  
+  .welcome-card h2 {
+    font-size: 1.25rem;
+  }
+  
+  .results-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .results-actions .btn {
+    width: 100%;
+  }
+  
+  .option-btn {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==========================================================================
+   Deck Progress Widget Styles
+   ========================================================================== */
+
+.deck-progress-widget {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--card-border);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 480px;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.deck-progress-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.deck-progress-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.deck-progress-stats strong {
+  color: var(--text-main);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+}
+
+.deck-progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background-color: rgba(226, 232, 240, 0.7);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.deck-progress-bar-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 50px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.deck-shuffle-badge {
+  background-color: var(--color-correct-bg);
+  border: 1px solid var(--color-correct-border);
+  color: var(--color-correct-text);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 50px;
+  text-align: center;
+  font-weight: 500;
+  animation: pulseShuffle 2s infinite;
+}
+
+@keyframes pulseShuffle {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.btn-reset-link {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 10px 20px; /* Substantial padding to make a comfortable touch target (height ~40px) */
+  align-self: center;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-reset-link:hover {
+  color: var(--color-incorrect-text);
+  background-color: var(--color-incorrect-bg); /* Soft red pastel background on hover for warning feedback */
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Completion Progress Widget Styles
+   ========================================================================== */
+
+.completion-widget {
+  margin-top: 8px;
+  border-top: 1px dashed rgba(226, 232, 240, 1);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.completion-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.completion-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.completion-info strong {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  color: var(--color-primary);
+}
+
+.completion-bar-container {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(226, 232, 240, 0.7);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.completion-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+  border-radius: 50px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

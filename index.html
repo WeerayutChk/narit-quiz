@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NARIT Law Quiz App - แบบทดสอบพระราชกฤษฎีกา สดร.</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-background-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <main class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-container" id="logo-home-btn" title="กลับหน้าแรก">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+        <span class="logo-text">NARIT Quiz</span>
+      </div>
+      <h1 id="main-title">แบบทดสอบพระราชกฤษฎีกาจัดตั้ง สดร.</h1>
+      <p class="subtitle">สถาบันวิจัยดาราศาสตร์แห่งชาติ (องค์การมหาชน) พ.ศ. 2551 และ 2563</p>
+    </header>
+
+    <!-- Welcome Screen -->
+    <section id="welcome-screen" class="screen active">
+      <div class="welcome-card">
+        <div class="welcome-image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            <circle cx="12" cy="9" r="2"></circle>
+            <path d="m14 13-2-2-2 2"></path>
+          </svg>
+        </div>
+        <h2 id="welcome-level-title">เลเวล 1</h2>
+        <p class="level-subtitle" style="font-size: 0.9rem; font-weight: 500; color: var(--color-primary); margin-top: -15px;">โหมดทดสอบความรู้สไตล์เลเวล (ต้องตอบถูก 10/10 เท่านั้นจึงจะผ่าน!)</p>
+        <p class="description">
+          แบบทดสอบนี้จะสุ่มคำถามมาทั้งหมด <strong>10 ข้อ</strong> จากคลังข้อถามเกี่ยวกับพระราชกฤษฎีกาจัดตั้ง สดร. ทั้งฉบับแรก (พ.ศ. 2551) และฉบับปรับปรุงแก้ไขเพิ่มเติม (ฉบับที่ 2 พ.ศ. 2563) เพื่อช่วยทบทวนความรู้ได้อย่างมีประสิทธิภาพ
+        </p>
+        <div class="quiz-info-chips">
+          <div class="info-chip">
+            <span class="chip-icon">📋</span>
+            <span class="chip-text">จำนวน 10 ข้อ</span>
+          </div>
+          <div class="info-chip">
+            <span class="chip-icon">⏱️</span>
+            <span class="chip-text">ไม่จำกัดเวลา</span>
+          </div>
+          <div class="info-chip">
+            <span class="chip-icon">🎯</span>
+            <span class="chip-text">มีคำอธิบายเฉลย</span>
+          </div>
+        </div>
+
+        <!-- Deck Progress Widget -->
+        <div class="deck-progress-widget">
+          <div class="deck-progress-title">📊 สถิติกล่องคำถาม (สุ่มไม่ซ้ำข้อเดิม)</div>
+          <div class="deck-progress-stats">
+            <div>เล่นสะสมไปแล้ว: <strong id="welcome-rounds-played">0</strong> รอบ</div>
+            <div>ใช้คำถามแล้ว: <strong id="welcome-deck-used">0/-</strong> ข้อ</div>
+            <div>รอบสุ่มที่เหลือก่อนสับไพ่ใหม่: <strong id="welcome-rounds-remaining">-</strong> รอบ</div>
+          </div>
+          <div class="deck-progress-bar-container">
+            <div id="welcome-deck-bar-fill" class="deck-progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div id="welcome-deck-shuffle-badge" class="deck-shuffle-badge hidden">🔄 ระบบสับไพ่ใหม่แล้ว! (ตอบครบถ้วนทุกข้อแล้ว)</div>
+          
+          <!-- Completion Widget -->
+          <div class="completion-widget">
+            <div class="completion-title">🏆 ระดับความสำเร็จ (ตอบถูกสะสมไม่ซ้ำข้อ)</div>
+            <div class="completion-info">
+              <span>ตอบถูกแล้ว: <strong id="welcome-completion-count">0/-</strong> ข้อ</span>
+              <strong id="welcome-completion-percent">0%</strong>
+            </div>
+            <div class="completion-bar-container">
+              <div id="welcome-completion-bar-fill" class="completion-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <button id="reset-progress-btn" class="btn-reset-link">ล้างประวัติและเริ่มเลเวล 1 ใหม่</button>
+        </div>
+
+        <button id="start-btn" class="btn btn-primary">
+          เริ่มทำแบบทดสอบ
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Quiz Screen -->
+    <section id="quiz-screen" class="screen">
+      <div class="quiz-progress-wrapper">
+        <div class="progress-info">
+          <span id="question-counter">ข้อที่ 1 จาก 10</span>
+          <span id="score-counter">คะแนน: 0</span>
+        </div>
+        <div class="progress-bar-container">
+          <div id="progress-bar-fill" style="width: 10%;"></div>
+        </div>
+      </div>
+
+      <!-- Live Explanation Card (shows immediately after answering if wrong or right) -->
+      <div id="explanation-card" class="explanation-card hidden">
+        <div class="explanation-header">
+          <span id="explanation-status-icon">💡</span>
+          <h4 id="explanation-status-title">คำอธิบายประกอบกฎหมาย</h4>
+        </div>
+        <p id="explanation-text">เนื้อความตามมาตราและคำอธิบายจะถูกกรอกที่นี่</p>
+      </div>
+
+      <div class="quiz-navigation">
+        <button id="next-btn" class="btn btn-primary hidden" disabled>
+          ข้อถัดไป
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="question-card">
+        <h3 id="question-text" class="question-text">คำถามจะแสดงที่นี่</h3>
+        <div id="options-container" class="options-container">
+          <!-- Options will be dynamically populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Screen -->
+    <section id="results-screen" class="screen">
+      <div class="results-card">
+        <h2>สรุปผลคะแนนของคุณ</h2>
+        
+        <div class="circular-progress-wrapper">
+          <svg class="circular-progress" viewBox="0 0 100 100">
+            <circle class="circle-bg" cx="50" cy="50" r="40"></circle>
+            <circle id="circle-fill" class="circle-fill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+          </svg>
+          <div class="progress-text-overlay">
+            <span id="final-score-text">0/10</span>
+            <span class="score-label">คะแนน</span>
+          </div>
+        </div>
+
+        <h3 id="result-message-title">เยี่ยมมาก!</h3>
+        <p id="result-message-desc" class="description">คุณทำแบบทดสอบเรียบร้อยแล้ว ลองมาดูประวัติการตอบของคุณด้านล่าง</p>
+
+        <!-- Deck Progress Widget -->
+        <div class="deck-progress-widget" style="width: 100%; max-width: 380px; margin-top: 5px;">
+          <div class="deck-progress-title">📊 สถิติกล่องคำถาม (สุ่มไม่ซ้ำข้อเดิม)</div>
+          <div class="deck-progress-stats">
+            <div>เล่นสะสมไปแล้ว: <strong id="results-rounds-played">0</strong> รอบ</div>
+            <div>ใช้คำถามแล้ว: <strong id="results-deck-used">0/-</strong> ข้อ</div>
+            <div>รอบสุ่มที่เหลือก่อนสับไพ่ใหม่: <strong id="results-rounds-remaining">-</strong> รอบ</div>
+          </div>
+          <div class="deck-progress-bar-container">
+            <div id="results-deck-bar-fill" class="deck-progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div id="results-deck-shuffle-badge" class="deck-shuffle-badge hidden">🔄 ระบบสับไพ่ใหม่แล้ว! (ตอบครบถ้วนทุกข้อแล้ว)</div>
+
+          <!-- Completion Widget -->
+          <div class="completion-widget" style="width: 100%;">
+            <div class="completion-title">🏆 ระดับความสำเร็จทั้งหมด (สะสมตอบถูกไม่ซ้ำข้อ)</div>
+            <div class="completion-info">
+              <span>สะสมตอบถูกแล้ว: <strong id="results-completion-count">0/-</strong> ข้อ</span>
+              <strong id="results-completion-percent">0%</strong>
+            </div>
+            <div class="completion-bar-container">
+              <div id="results-completion-bar-fill" class="completion-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button id="next-level-btn" class="btn btn-primary hidden">ไปต่อเลเวลถัดไป</button>
+          <button id="restart-btn" class="btn btn-secondary">ลองใหม่อีกครั้ง</button>
+          <button id="view-review-btn" class="btn btn-primary hidden">ดูข้อที่ตอบผิด</button>
+        </div>
+      </div>
+
+      <!-- Incorrect Questions Review Section -->
+      <div id="review-section" class="review-section hidden">
+        <div class="review-section-header">
+          <h3>📋 รายการข้อที่ตอบผิด</h3>
+          <p>ศึกษาข้อมูลข้อผิดพลาดเพื่อทำความเข้าใจให้ถูกต้องยิ่งขึ้น</p>
+        </div>
+        <div id="review-list-container" class="review-list-container">
+          <!-- Dynamic review cards go here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>© 2026 NARIT Law Practice Web App. Built with 💜 & Pastel Aesthetics.</p>
+    </footer>
+  </main>
+
+  <!-- Script Modules -->
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
